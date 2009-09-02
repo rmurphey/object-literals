@@ -1,11 +1,13 @@
 var myFeature = {
-	config : {
-		$items : $('#myFeature li'),
-		urlBase : 'foo.php?item=',
-		container : 'div.container'
-	},
-	
 	init : function(settings) {
+		myFeature.config = {
+			$items : $('#myFeature li'),
+			urlBase : '/foo.php?item=',
+			container : '<div class="container"></div>',
+			containerSelector : 'div.container'
+		};
+
+		var settings = settings || {};
 		// allow overriding the default config
 		$.extend(myFeature.config, settings);
 		
@@ -32,11 +34,11 @@ var myFeature = {
 	
 	getContent : function($item, callback) {
 		var url = myFeature.buildUrl($item);
-		$item.load(url, callback);
+		$item.find(myFeature.config.containerSelector).load(url, callback);
 	},
 	
 	showContent : function($item) {
-		$item.find(myFeature.config.container).show();
+		$item.find(myFeature.config.containerSelector).show();
 		myFeature.hideContent($item);
 	},
 	
@@ -46,7 +48,7 @@ var myFeature = {
 	
 	hideContent : function($item) {
 		var $items = myFeature.getItemsToHide($item);
-		$items.find(myFeature.config.container).hide();
+		$items.find(myFeature.config.containerSelector).hide();
 	}
 };
 

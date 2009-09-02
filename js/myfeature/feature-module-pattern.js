@@ -3,8 +3,9 @@ var createFeature = function(settings) {
 	
 	var _config = {
 		$items : $('#myFeature li'),
-		urlBase : 'foo.php?item=',
-		container : 'div.container'
+		urlBase : '/foo.php?item=',
+		container : '<div class="container"></div>',
+		containerSelector : 'div.container'
 	};
 	
 	// allow overriding default config
@@ -14,11 +15,11 @@ var createFeature = function(settings) {
 	// (this is a convention, not required)
 	var _getContent = function($item, callback) {
 		var url = _buildUrl($item);
-		$item.load(url, callback);
+		$item.find(_config.containerSelector).load(url, callback);
 	};
 
 	var _showContent = function($item) {
-		$item.find(_config.container).show();
+		$item.find(_config.containerSelector).show();
 		_hideContent($item);
 	};
 
@@ -32,7 +33,7 @@ var createFeature = function(settings) {
 
 	var _hideContent = function($item) {
 		var $items = _getItemsToHide($item);
-		$items.find(_config.container).hide();
+		$items.find(_config.containerSelector).hide();
 	};
 	
 	// this will be a public method, but it's not yet
@@ -44,7 +45,7 @@ var createFeature = function(settings) {
 	};
 
 	// set up the behavior
-	config.$items
+	_config.$items
 		.append(_config.container)
 		.click(function() {
 			var $this = $(this);
@@ -55,7 +56,7 @@ var createFeature = function(settings) {
 	myFeature.showItem = showItem;
 	
 	// make the list of items public
-	myFeature.$items = config.$items;
+	myFeature.$items = _config.$items;
 
 	return myFeature;
 
