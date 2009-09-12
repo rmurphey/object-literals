@@ -46,21 +46,18 @@ var modal = {
 		modal.$o.hide();
 	}
 };
- 
+
 $(document).ready(function() {
-	var $links = $('#menus a');
-	if ($links.length) {
-		$links.click(function(e) {
-			e.preventDefault();
-			var href = $(this).attr('href');
-			$.ajax({
-				url : href,
-				dataType : 'html',
-				type : 'GET',
-				success : function(html) {
-					modal.populate(html);
-				}
-			});
+	$('#menus a').click(function(e) {
+		e.preventDefault();
+		var href = $(this).attr('href');
+		$.ajax({
+			url : href,
+			dataType : 'html',
+			type : 'GET',
+			success : function(html) {
+				modal.populate(html);
+			}
 		});
-	}
+	});
 });

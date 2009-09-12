@@ -7,7 +7,6 @@ var myFeature = {
 			containerSelector : 'div.container'
 		};
 
-		var settings = settings || {};
 		// allow overriding the default config
 		$.extend(myFeature.config, settings);
 		
