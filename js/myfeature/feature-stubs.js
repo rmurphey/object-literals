@@ -11,8 +11,6 @@ var myFeature = {
 	
 	showContent : function($item) { },
 	
-	getItemsToHide : function($item) { },
-	
 	hideContent : function($item) { }
 };
 

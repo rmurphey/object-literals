@@ -33,21 +33,22 @@ var myFeature = {
 	
 	getContent : function($item, callback) {
 		var url = myFeature.buildUrl($item);
-		$item.find(myFeature.config.containerSelector).load(url, callback);
+		$item
+			.find(myFeature.config.containerSelector)
+				.load(url, callback);
 	},
 	
 	showContent : function($item) {
-		$item.find(myFeature.config.containerSelector).show();
+		$item
+			.find(myFeature.config.containerSelector)
+				.show();
 		myFeature.hideContent($item);
 	},
 	
-	getItemsToHide : function($item) {
-		return $item.siblings();
-	},
-	
 	hideContent : function($item) {
-		var $items = myFeature.getItemsToHide($item);
-		$items.find(myFeature.config.containerSelector).hide();
+		$item.siblings()
+			.find(myFeature.config.containerSelector)
+				.hide();
 	}
 };
 
